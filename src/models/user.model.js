@@ -35,7 +35,7 @@ class UserModel {
 
         const result = await query(sql, [username, password, first_name, last_name, email, role, age]);
         const affectedRows = result ? result.affectedRows : 0;
-
+        console.log(result);
         return affectedRows;
     }
 

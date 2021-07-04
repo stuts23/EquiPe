@@ -4,6 +4,7 @@ const cors = require("cors");
 const HttpException = require('./utils/HttpException.utils');
 const errorMiddleware = require('./middleware/error.middleware');
 const userRouter = require('./routes/user.route');
+const openViduRouter = require('./controllers/openviduroutes');
 
 // Init express
 const app = express();
@@ -18,7 +19,7 @@ app.use(cors());
 app.options("*", cors());
 
 const port = Number(process.env.PORT || 3000);
-
+app.use("/api/v1/openvidu", openViduRouter);
 app.use(`/api/v1/users`, userRouter);
 
 // 404 error

@@ -5,10 +5,10 @@ const mysql2 = require('mysql2');
 class DBConnection {
     constructor() {
         this.db = mysql2.createPool({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-            database: process.env.DB_DATABASE
+            host: "localhost",
+            user: "stuts",
+            password: "ShihTzuDoggo",
+            database: "test_db"
         });
 
         this.checkConnection();
@@ -38,7 +38,8 @@ class DBConnection {
         return new Promise((resolve, reject) => {
             const callback = (error, result) => {
                 if (error) {
-                    reject(error);
+                    console.log(error);
+                    //reject(error);
                     return;
                 }
                 resolve(result);
