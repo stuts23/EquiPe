@@ -1,17 +1,19 @@
 import React from "react";
-import SignInSide from "./login";
-import SignUp from "./signup";
+import SignInSide from "./views/login";
+import SignUp from "./views/signup";
 import { Route, Link } from "react-router-dom";
-import home from "./home";
 import VideoRoomComponent from "./VideoRoomComponent";
+import Welcome from "./views/welcome";
+import Team from "./views/team";
 
 function App() {
   return (
     <div className="App">
         <Route path="/login" component={SignInSide} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/home" component={home} />
         <Route path="/call/:sessionId" component={VideoRoomComponent} />
+        <Route path="/welcome" component={Welcome} />
+        <Route path="/team" component={Team} />
     </div>
   );
 }

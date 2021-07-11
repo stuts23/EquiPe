@@ -5,6 +5,8 @@ const HttpException = require('./utils/HttpException.utils');
 const errorMiddleware = require('./middleware/error.middleware');
 const userRouter = require('./routes/user.route');
 const openViduRouter = require('./controllers/openviduroutes');
+const socketSetup = require('./socket.js')
+const http = require('http');
 
 // Init express
 const app = express();
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use(cors());
 // Enable pre-flight
 app.options("*", cors());
+const server = http.createServer(app);
+socketSetup(server);
 
 const port = Number(process.env.PORT || 3000);
 app.use("/api/v1/openvidu", openViduRouter);
@@ -32,7 +36,7 @@ app.all('*', (req, res, next) => {
 app.use(errorMiddleware);
 
 // starting the server
-app.listen(port, () =>
+server.listen(port, () =>
     console.log(`🚀 Server running on port ${port}!`));
 
 

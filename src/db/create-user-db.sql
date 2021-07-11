@@ -14,3 +14,21 @@ CREATE TABLE IF NOT EXISTS user
      email      VARCHAR(100) UNIQUE NOT NULL, 
      role       ENUM('Admin', 'SuperUser') DEFAULT 'SuperUser'
   ); 
+
+-- Dumping structure for table heroku_7697c875dc5b5f3.channels
+CREATE TABLE IF NOT EXISTS `channels` (
+  `channel_id` varchar(50) DEFAULT NULL,
+  `channel_name` varchar(50) DEFAULT NULL,
+  `server_id` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table heroku_7697c875dc5b5f3.messages
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `channel_id` varchar(50) DEFAULT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `msg` text,
+  `date` varchar(50) DEFAULT NULL,
+  KEY `Primary Key` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12012 DEFAULT CHARSET=utf8;

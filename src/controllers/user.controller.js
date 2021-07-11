@@ -130,7 +130,7 @@ class UserController {
 
     const { password, ...userWithoutPassword } = user;
 
-    res.send({ ...userWithoutPassword, token });
+    res.send({ ...userWithoutPassword, token, username:user.username });
   };
 
   checkValidation = (req) => {
