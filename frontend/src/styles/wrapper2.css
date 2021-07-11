@@ -1,0 +1,20 @@
+.site-layout-background {
+    background: #fff !important;
+  }
+
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .site-layout{
+      padding-left: 0rem;
+  }
+
+
+  .scrollable-view{
+    height: calc(100vh - 180px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
