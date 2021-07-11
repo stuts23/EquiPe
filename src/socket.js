@@ -6,7 +6,7 @@ const Socket = require('socket.io');
 const dotenv = require('dotenv');
 const sql = require('./db/db')
 
-var socketIO = require('socket.io');
+var socketIO = require('socket.io')
 var io;
 //let io: SocketIO.Server = require('socket.io')(server);
 

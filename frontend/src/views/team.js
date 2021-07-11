@@ -8,10 +8,15 @@ import "../styles/wrapper2.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
-import io from "socket.io-client";
+//import io from "socket.io-client";
+
+
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+const io = require("socket.io-client")("http://localhost:3000", {
+  rejectUnauthorized: false // WARN: please do not do this in production
+});
 var baseUrl = "http://localhost:3000";
 
 const Team = () => {
