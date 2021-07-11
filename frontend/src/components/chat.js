@@ -21,7 +21,8 @@ class Chatpage extends React.Component {
     this.state = {
       data: [],
       loading: false,
-      altdata: []
+      altdata: [],
+      prevChats: [],
     };
   }
 
@@ -29,7 +30,7 @@ class Chatpage extends React.Component {
 
   handleUpdate = (msg) => {
     const { data } = this.state;
-    console.log("update recieved");
+    //console.log("update recieved");
     //console.log(data, msg);
 
     //data.push(msg)
@@ -42,10 +43,10 @@ class Chatpage extends React.Component {
     newdata.push(msg)
     let testdata = newdata.filter(obj => obj?.channel_id===this.props.channel)
     //console.log(processdata)
-    console.log(newdata, this.state.altdata, testdata)
+    //console.log(newdata, this.state.altdata, testdata)
 
     this.setState((prevState) => {
-      console.log(newdata)
+      //console.log(newdata)
       return {
         ...prevState,
         data: testdata,
@@ -56,22 +57,23 @@ class Chatpage extends React.Component {
 
   componentDidMount() {
 
-      var config = {
-        method: "get",
-        url: "http://localhost:3000/api/v1/users/prevchats",
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-          "Content-Type": "application/json",
-        },
-      };
+      // var config = {
+      //   method: "get",
+      //   url: "http://localhost:3000/api/v1/users/prevchats",
+      //   headers: {
+      //     Authorization: `Bearer ${Cookies.get("token")}`,
+      //     "Content-Type": "application/json",
+      //   },
+      // };
   
-      axios(config).then(res => {
-        console.log(res)
-        this.setState({altdata: res.data, data: res.data.filter(obj => obj?.channel_id===this.props.channel)})
+      // axios(config).then(res => {
+      //   console.log(res)
+      //   this.setState({altdata: res.data, data: res.data.filter(obj => obj?.channel_id===this.props.channel)})
   
-      })
+      // })
       
-  
+    this.setState({data: this.props.chats})
+    //console.log(this.props.chats)
     this.props.socket.on("update", this.handleUpdate);
     // this.fetchData((res) => {
     //   this.setState({
@@ -82,6 +84,20 @@ class Chatpage extends React.Component {
     this.handleUpdate();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(
+      {
+        prevChats: nextProps.chats
+      }
+    )
+    if(this.state.prevChats.length!==nextProps.chats.length){
+      this.setState({
+        data: nextProps.chats
+      })
+    }
+    console.log(nextProps)
+  }
+  
   fetchData = (callback) => {
     reqwest({
       url: fakeDataUrl,
@@ -134,7 +150,7 @@ class Chatpage extends React.Component {
   };
 
   render() {
-    console.log(this.state)
+    //console.log(this.state)
     const { data } = this.state;
     const vlist = ({
       height,

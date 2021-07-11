@@ -22,13 +22,13 @@ class SiderDemo extends React.Component {
 	
   }
   onCollapse = (collapsed) => {
-    console.log(collapsed);
+    // console.log(collapsed);
     this.setState({ collapsed });
   };
 
   handleClick = (e) => {
     this.props.setTeam(e.key)
-    console.log('clicked');
+    // console.log('clicked');
   };
 
   render() {

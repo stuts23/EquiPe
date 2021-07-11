@@ -2,7 +2,7 @@
 const Socket = require('socket.io');
 
 // Dependencies
-const express = require('express');
+//const express = require('express');
 const dotenv = require('dotenv');
 const sql = require('./db/db')
 
@@ -17,8 +17,11 @@ async function socketSetup(server) {
   io = socketIO(server, {
     cors: {
       origin: "http://localhost:3001",
-      methods: ["GET", "POST"]
-    }
+      methods: ["GET", "POST"],
+      transports: ['websocket', 'polling'],
+      credentials: true,
+    },
+    allowEIO3: true
   });
   // Config for env variables
   dotenv.config();

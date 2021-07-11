@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Wrapper2 from "../components/wrapper2";
 import { Row, Col } from "antd";
 import Channels from "../components/channels";
@@ -9,15 +9,19 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
 import io from "socket.io-client";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 var baseUrl = "http://localhost:3000";
 
 const Team = () => {
-  let socket = io.connect(baseUrl);
+  let socket = io.connect(baseUrl, {'transports': ['websocket', 'polling']});
 
   const [message, setMessage] = useState("");
   const [channel, setChannel] = useState("");
   const [team, setTeam] = useState("");
+  const [channels, setChannels] = useState([]);
+  const [chats, setChats] = useState([]);
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
@@ -31,12 +35,33 @@ const Team = () => {
     });
   };
 
+  useEffect(() => {
+    
+    var config = {
+      method: "get",
+      url: "http://localhost:3000/api/v1/users/channels",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios(config).then(res => {
+      //console.log(res)
+      setChannels(res.data.filter(obj => obj?.server_id===team));
+      //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
+
+    })
+
+  })
+
+
   return (
     <Wrapper2 setTeam={setTeam}>
       <Row gutter={[16, 0]}>
         <Col span={6}>
           <div className="scrollable-view">
-            <Channel2 channel={channel} setChannel={setChannel} team={team}/>
+            <Channel2 channel={channel} setChannel={setChannel} team={team} channels={channels} setChats={setChats}/>
           </div>
           <Row gutter={[8, 0]}>
             <Col span={20}>
@@ -62,7 +87,7 @@ const Team = () => {
         </Col>
         <Col span={18}>
           <div className="scrollable-view">
-            <Chat channel={channel} socket={socket} />
+            <Chat channel={channel} socket={socket} chats={chats}/>
           </div>
           <Row gutter={[8, 0]}>
             <Col span={22}>
