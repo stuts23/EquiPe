@@ -32,3 +32,34 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `date` varchar(50) DEFAULT NULL,
   KEY `Primary Key` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12012 DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table heroku_7697c875dc5b5f3.servers
+CREATE TABLE IF NOT EXISTS `servers` (
+  `server_id` varchar(50) NOT NULL,
+  `server_name` varchar(50) NOT NULL,
+  `owner_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table heroku_7697c875dc5b5f3.userservers
+CREATE TABLE IF NOT EXISTS `userservers` (
+  `user_id` varchar(50) DEFAULT NULL,
+  `server_id` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table heroku_7697c875dc5b5f3.user_messages
+CREATE TABLE IF NOT EXISTS `user_messages` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `user_from` varchar(50) DEFAULT NULL,
+  `user_to` varchar(50) DEFAULT NULL,
+  `msg` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+

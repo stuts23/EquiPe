@@ -1,12 +1,16 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import {
-  FileOutlined,
   TeamOutlined,
   VideoCameraFilled,
-  HomeOutlined
+  HomeOutlined,
+  UsergroupAddOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import "../styles/wrapper2.css";
+import axios from "axios";
+import Cookies from "js-cookie";
+
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -18,6 +22,7 @@ class SiderDemo extends React.Component {
 
     this.state = {
       collapsed: false,
+      team: [],
     };
 	
   }
@@ -26,10 +31,34 @@ class SiderDemo extends React.Component {
     this.setState({ collapsed });
   };
 
+  handleGetdata = () => {
+    let config = {
+      method: "get",
+      url: "http://localhost:3000/api/v1/users/team/fetch",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios(config).then(res => {
+      console.log(res)
+      this.setState({team : res.data});
+      //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
+ })
+  }
+
+  componentDidMount() {
+    
+   this.handleGetdata();
+  };
+
   handleClick = (e) => {
-    this.props.setTeam(e.key)
+    //this.props.setTeam(e)
+      
     // console.log('clicked');
   };
+  
 
   render() {
     const { collapsed } = this.state;
@@ -42,18 +71,18 @@ class SiderDemo extends React.Component {
               Home
             </Menu.Item>
             <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams">
-              
-              <Menu.Item key="team1" onClick={this.handleClick}>Team 1</Menu.Item>
-             
-              <Menu.Item key="team2" onClick={this.handleClick}>Team 2</Menu.Item>
-              <Menu.Item key="team3" onClick={this.handleClick}>Team 3</Menu.Item>
+            {this.state.team?this.state.team.map (team => {
+               return <Menu.Item key={team.server_id} onClick={this.handleClick(team.server_id)}>{team.server_id}</Menu.Item>
+            }): null}
             </SubMenu>
-            {/* <SubMenu key="sub2" icon={<UserOutlined />} title="Team">
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu> */}
-            <Menu.Item key="9" icon={<VideoCameraFilled />}>
+            <Menu.Item key="9" icon={<UsergroupAddOutlined />}>
+              Join Team
+            </Menu.Item>
+            <Menu.Item key="9" icon={<VideoCameraFilled/>}>
               Instant Call
+            </Menu.Item>
+            <Menu.Item key="9" icon={<LogoutOutlined/>}>
+              Logout
             </Menu.Item>
           </Menu>
         </Sider>

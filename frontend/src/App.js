@@ -5,6 +5,7 @@ import { Route, Link } from "react-router-dom";
 import VideoRoomComponent from "./VideoRoomComponent";
 import Welcome from "./views/welcome";
 import Team from "./views/team";
+import joinTeam from "./views/jointeam";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/call/:sessionId" component={VideoRoomComponent} />
         <Route path="/welcome" component={Welcome} />
         <Route path="/team" component={Team} />
+        <Route path="/jointeam" component={joinTeam} />
     </div>
   );
 }
