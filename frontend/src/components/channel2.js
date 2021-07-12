@@ -43,7 +43,7 @@ class Channel2 extends React.Component {
 
     var config = {
       method: "get",
-      url: "http://localhost:3000/api/v1/users/prevchats",
+      url: "/api/v1/users/prevchats",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
         "Content-Type": "application/json",

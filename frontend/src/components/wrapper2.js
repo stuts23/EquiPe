@@ -36,7 +36,7 @@ class SiderDemo extends React.Component {
   handleGetdata = () => {
     let config = {
       method: "get",
-      url: "http://localhost:3000/api/v1/users/team/fetch",
+      url: "/api/v1/users/team/fetch",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
         "Content-Type": "application/json",

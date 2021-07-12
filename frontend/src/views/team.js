@@ -12,10 +12,9 @@ import FormItem from "antd/lib/form/FormItem";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const io = require("socket.io-client")("http://localhost:3000", {
-  rejectUnauthorized: false, // WARN: please do not do this in production
+const io = require("socket.io-client")("", {
 });
-var baseUrl = "http://localhost:3000";
+var baseUrl = "";
 
 const Team = () => {
   let socket = io.connect(baseUrl, { transports: ["websocket", "polling"] });
@@ -42,7 +41,7 @@ const Team = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: "http://localhost:3000/api/v1/users/channels",
+      url: "/api/v1/users/channels",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
         "Content-Type": "application/json",
@@ -64,7 +63,7 @@ const Team = () => {
     });
     let config = {
       method: "post",
-      url: "http://localhost:3000/api/v1/users/channel/create",
+      url: "/api/v1/users/channel/create",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
         "Content-Type": "application/json",

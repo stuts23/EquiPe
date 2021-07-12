@@ -16,7 +16,7 @@ function JoinTeam() {
 		let data = JSON.stringify({serverId: newteam})
 		let config = {
 		  method: "post",
-		  url: "http://localhost:3000/api/v1/users/team/join",
+		  url: "/api/v1/users/team/join",
 		  headers: {
 			Authorization: `Bearer ${Cookies.get("token")}`,
 			"Content-Type": "application/json"},
@@ -37,7 +37,7 @@ function JoinTeam() {
 		let data = JSON.stringify({serverId: teamid, serverName:teamname})
 		let config = {
 		  method: "post",
-		  url: "http://localhost:3000/api/v1/users/team/create",
+		  url: "/api/v1/users/team/create",
 		  headers: {
 			Authorization: `Bearer ${Cookies.get("token")}`,
 			"Content-Type": "application/json"},
