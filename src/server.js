@@ -7,6 +7,7 @@ const userRouter = require('./routes/user.route');
 const openViduRouter = require('./controllers/openviduroutes');
 const socketSetup = require('./socket.js')
 const http = require('http');
+const path = require('path');
 
 // Init express
 const app = express();
@@ -15,13 +16,16 @@ dotenv.config();
 // parse requests of content-type: application/json
 // parses incoming requests with JSON payloads
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 // enabling cors for all requests by using cors middleware
 app.use(cors());
 // Enable pre-flight
 app.options("*", cors());
 const server = http.createServer(app);
 socketSetup(server);
-
+app.get('/:any', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
 const port = Number(process.env.PORT || 3000);
 app.use("/api/v1/openvidu", openViduRouter);
 app.use(`/api/v1/users`, userRouter);
