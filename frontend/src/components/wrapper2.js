@@ -10,6 +10,7 @@ import {
 import "../styles/wrapper2.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {Link, Redirect} from 'react-router-dom';
 
 
 const { Header, Content, Sider } = Layout;
@@ -23,6 +24,7 @@ class SiderDemo extends React.Component {
     this.state = {
       collapsed: false,
       team: [],
+
     };
 	
   }
@@ -49,7 +51,6 @@ class SiderDemo extends React.Component {
   }
 
   componentDidMount() {
-    
    this.handleGetdata();
   };
 
@@ -61,28 +62,40 @@ class SiderDemo extends React.Component {
   
 
   render() {
+
     const { collapsed } = this.state;
+    
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" >
+          
             <Menu.Item key="1" icon={<HomeOutlined />}>
+            <Link to="/welcome">
               Home
+              </Link>
             </Menu.Item>
+            
             <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams">
             {this.state.team?this.state.team.map (team => {
                return <Menu.Item key={team.server_id} onClick={this.handleClick(team.server_id)}>{team.server_id}</Menu.Item>
             }): null}
             </SubMenu>
+            
             <Menu.Item key="9" icon={<UsergroupAddOutlined />}>
+            <Link to="/jointeam">
               Join Team
+              </Link>
             </Menu.Item>
-            <Menu.Item key="9" icon={<VideoCameraFilled/>}>
+            
+            <Menu.Item key="10" icon={<VideoCameraFilled/>}>
               Instant Call
             </Menu.Item>
-            <Menu.Item key="9" icon={<LogoutOutlined/>}>
+            <Menu.Item key="11" icon={<LogoutOutlined/>}>
+              <span onClick={()=>Cookies.remove("token")}>
               Logout
+              </span>
             </Menu.Item>
           </Menu>
         </Sider>

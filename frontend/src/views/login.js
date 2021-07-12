@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "js-cookie";
 import axios from "axios";
 import login_image from "../assets/login_image.jpg";
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +83,6 @@ export default function SignInSide() {
         console.log(error);
       });
   };
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -148,4 +148,5 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
+  
 }

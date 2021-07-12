@@ -36,7 +36,7 @@ function Welcome() {
         <Col span={14}>
         <Row span={24} gutter={[0, 64]} style={{ marginTop: "4rem" }}>
           <Title>
-            <span style={{ color: "#001529" }}>Welcome to Connect App!</span>
+            <span style={{ color: "#001529" }}>Welcome to équipe!</span>
           </Title>
         </Row>
         <Row span={24} style={{ marginBottom: "4rem" }}>

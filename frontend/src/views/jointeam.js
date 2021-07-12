@@ -62,7 +62,7 @@ function JoinTeam() {
 				<img alt={"join team"} src={join_team}>
 				</img>
 			</Row>
-			<Row>
+			<Row gutter={[0, 16]}>
 				<Col span={4}></Col>
 				<Col span={16}>
 			<Input placeholder="Team Id" onChange={(e) => setTeamid(e.target.value)} value={teamid}/>
@@ -79,11 +79,15 @@ function JoinTeam() {
 				<img alt={"join team"} src={join_team}>
 				</img>
 			</Row>
-			<Row>
+			<Row gutter={[0, 16]}>
+			<Col span={4}></Col>
+			<Col span={16}>
 			<Input placeholder="Team Id" onChange={(e) => setNewteam(e.target.value)} value={newteam}/>
 			<Button type="primary" size="large" onClick={() => handleTeamJoin()}>
           Join Team
         </Button>
+		</Col>
+		<Col span={4}></Col>
 			</Row>
 			</Col>
 
