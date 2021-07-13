@@ -12,12 +12,13 @@ import FormItem from "antd/lib/form/FormItem";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const io = require("socket.io-client")("", {
+const io = require("socket.io-client")("http://localhost:3000", {
 });
-var baseUrl = "";
+var baseUrl = "http://localhost:3000";
+let socket = io.connect(baseUrl, { transports: ["websocket", "polling"] });
 
 const Team = () => {
-  let socket = io.connect(baseUrl, { transports: ["websocket", "polling"] });
+  
 
   const [message, setMessage] = useState("");
   const [channel, setChannel] = useState("");
@@ -36,6 +37,7 @@ const Team = () => {
       msg: message,
       user_name: "stuts",
     });
+    //setMessage("");
   };
 
   useEffect(() => {
@@ -53,7 +55,7 @@ const Team = () => {
       setChannels(res.data.filter((obj) => obj?.server_id === team));
       //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
     });
-  }, [channels, team]);
+  }, []);
 
   const handleChannelCreate = () => {
     let data = JSON.stringify({
@@ -79,17 +81,39 @@ const Team = () => {
     });
   };
 
+  const handleSubmit = async () => {
+    var config = {
+      method: "post",
+      url: "/api/v1/openvidu/create",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+      data: {},
+    };
+
+    const { data } = await axios(config);
+
+    window.open(`/call/${data}`, "_blank");
+  };
+
+  const copy = async () => {
+    await navigator.clipboard.writeText("invite code");
+    alert('Invite Code copied');
+  }
+
+
   return (
     <Wrapper2 setTeam={setTeam}>
       <Row>
         <Col span={19}></Col>
         <Col span={3}>
-        <Button ghost type="primary" htmlType="submit">
+        <Button ghost type="primary" htmlType="submit" onClick={copy}>
          Invite to  Team
         </Button>
         </Col>
         <Col span={2}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={handleSubmit}>
           Start Call
         </Button>
         </Col>

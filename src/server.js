@@ -26,6 +26,11 @@ socketSetup(server);
 app.get('/:any', function (req, res) {
     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
+
+app.get('/call/:sessionid', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
+
 const port = Number(process.env.PORT || 3000);
 app.use("/api/v1/openvidu", openViduRouter);
 app.use(`/api/v1/users`, userRouter);

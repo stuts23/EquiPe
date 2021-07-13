@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Wrapper2 from "../components/wrapper2";
 import { Row, Col } from "antd";
-import { Input, Button, Divider } from 'antd';
+import { Input, Button, Alert } from 'antd';
 import join_team from "../assets/join_team.png";
 import axios  from "axios";
 import Cookies from 'js-cookie';
@@ -29,7 +29,7 @@ function JoinTeam() {
 		  console.log(res)
 		  //setChannels(res.data.filter(obj => obj?.server_id===team));
 		  //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
-	
+		  alert('You have successfully joined the team');
 		})
 	}
 
@@ -50,7 +50,7 @@ function JoinTeam() {
 		  console.log(res)
 		  //setChannels(res.data.filter(obj => obj?.server_id===team));
 		  //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
-	
+		  alert('Team is successfully created!');
 		})
 	}
 

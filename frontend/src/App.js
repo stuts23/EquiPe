@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <Route path="/login" render={() => isAuth?<Welcome/> : <SignInSide/>} />
       <Route path="/signup" render={() => isAuth?<Welcome/> : <SignUp/>} />
-      <Route path="/call/:sessionId" render={() => isAuth?<VideoRoomComponent/> : <SignInSide/>} />
+      <Route path="/call/:sessionId" render={(props) => isAuth?<VideoRoomComponent {...props}/> : <SignInSide/>} />
       <Route path="/welcome" render={() => isAuth?<Welcome/> : <SignInSide/>} />
       <Route path="/team" render={() => isAuth?<Team/> : <SignInSide/>} />
       <Route path="/jointeam" render={() => isAuth?<JoinTeam/> : <SignInSide/>} />

@@ -13,16 +13,17 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "js-cookie";
 import axios from "axios";
-import login_image from "../assets/login_image.jpg";
+// import login_image from "../assets/login_image.jpg";
 import {Redirect} from 'react-router-dom';
+import login_image from "../assets/Login.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
   image: {
-    //backgroundImage: "url(https://source.unsplash.com/random)",
-    backgroundImage: {login_image},
+    backgroundImage:`url(${login_image})`,
+    // backgroundImage: {login_image},
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -78,6 +79,7 @@ export default function SignInSide() {
           expires: 365,
           secure: true,
         });
+        window.location.reload()
       })
       .catch(function (error) {
         console.log(error);

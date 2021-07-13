@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "js-cookie";
 import axios from "axios";
-import signup_image from "../assets/login_image.jpg"
+import signup_image from "../assets/signup.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +84,7 @@ export default function SignUp() {
           expires: 365,
           secure: true,
         });
+        window.location.reload()
       })
       .catch(function (error) {
         console.log(error);

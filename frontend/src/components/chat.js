@@ -72,7 +72,7 @@ class Chatpage extends React.Component {
   
       // })
       
-    this.setState({data: this.props.chats})
+    this.setState({altdata: this.props.chats, data: this.props.chats})
     //console.log(this.props.chats)
     this.props.socket.on("update", this.handleUpdate);
     // this.fetchData((res) => {
@@ -92,7 +92,7 @@ class Chatpage extends React.Component {
     )
     if(this.state.prevChats.length!==nextProps.chats.length){
       this.setState({
-        data: nextProps.chats
+        data: nextProps.chats, altdata: nextProps.chats
       })
     }
     console.log(nextProps)

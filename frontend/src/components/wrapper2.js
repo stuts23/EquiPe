@@ -59,6 +59,27 @@ class SiderDemo extends React.Component {
       
     // console.log('clicked');
   };
+
+  handleLogout = () => {
+    Cookies.remove("token");
+    window.location.reload();
+  };
+
+  handleSubmit = async () => {
+    var config = {
+      method: "post",
+      url: "/api/v1/openvidu/create",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+      data: {},
+    };
+
+    const { data } = await axios(config);
+
+    window.open(`/call/${data}`, "_blank");
+  };
   
 
   render() {
@@ -89,11 +110,11 @@ class SiderDemo extends React.Component {
               </Link>
             </Menu.Item>
             
-            <Menu.Item key="10" icon={<VideoCameraFilled/>}>
+            <Menu.Item key="10" icon={<VideoCameraFilled/>} onClick={this.handleSubmit}>
               Instant Call
             </Menu.Item>
             <Menu.Item key="11" icon={<LogoutOutlined/>}>
-              <span onClick={()=>Cookies.remove("token")}>
+              <span onClick={this.handleLogout}>
               Logout
               </span>
             </Menu.Item>

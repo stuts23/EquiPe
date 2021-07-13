@@ -6,14 +6,14 @@ import { Typography } from "antd";
 import { Button } from "antd";
 import { TeamOutlined, VideoCameraFilled } from "@ant-design/icons";
 import Cookies from "js-cookie";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import welcome_image from "../assets/welcome_image.png";
 
 const { Title, Text } = Typography;
 
 function Welcome() {
-  const history = useHistory();
+  //const history = useHistory();
   const handleSubmit = async () => {
     var config = {
       method: "post",
@@ -27,8 +27,9 @@ function Welcome() {
 
     const { data } = await axios(config);
 
-    history.push(`/call/${data}`);
+    window.open(`/call/${data}`, "_blank");
   };
+
 
   return (
     <Wrapper2>
@@ -43,7 +44,7 @@ function Welcome() {
           <Col span={24}>
             <Text>
               <span style={{ fontSize: "1.4rem" }}>
-                It is a new way to communicate and collaborate with your team.
+              Equipe is new hub to communicate and collaborate with your team in seamless manner.
                 It’s faster, better organized, and more efficient.
               </span>
             </Text>
@@ -64,9 +65,11 @@ function Welcome() {
             <p style={{ textAlign: "center", margin: "0" }}>or</p>
           </Col>
           <Col span={5.5}>
+            <Link to="/jointeam"> 
             <Button ghost type="primary" icon={<TeamOutlined />} size="large">
-              Explore Teams
+              Join/Create Teams
             </Button>
+            </Link>
           </Col>
         </Row>
         </Col>
