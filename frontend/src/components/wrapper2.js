@@ -29,7 +29,6 @@ class SiderDemo extends React.Component {
     this.state = {
       collapsed: false,
       team: [],
-      setTeam: () => {},
       
     };
 	
@@ -61,9 +60,8 @@ class SiderDemo extends React.Component {
   };
 
   handleClick = (e, teamId) => {
-    this.props.setTeam(teamId)
-      
-    console.log('clicked');
+    //this.props.setTeam(teamId)
+    this.props.history.push(`/team/${teamId}`)
   };
 
   handleLogout = () => {
@@ -118,7 +116,7 @@ class SiderDemo extends React.Component {
               </Link>
             </Menu.Item>
             
-            <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams" onTitleClick={() => this.nextPath('/team')}>
+            <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams">
             {this.state.team?this.state.team.map (team => {
                return <Menu.Item id={team.server_id} onClick={(e) => {this.handleClick(e, team.server_id)}}>{team.server_id}</Menu.Item>
             }): null}

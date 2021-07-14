@@ -14,7 +14,7 @@ function JoinTeam() {
 	const [newteam, setNewteam] = useState('')
 
 	const handleTeamJoin = () => {
-		let data = JSON.stringify({serverId: newteam})
+		let data = JSON.stringify({serverId: newteam })
 		let config = {
 		  method: "post",
 		  url: "/api/v1/users/team/join",
@@ -31,6 +31,7 @@ function JoinTeam() {
 		  //setChannels(res.data.filter(obj => obj?.server_id===team));
 		  //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
 		  alert('You have successfully joined the team');
+		  window.location.reload()
 		})
 	}
 
@@ -52,7 +53,14 @@ function JoinTeam() {
 		  //setChannels(res.data.filter(obj => obj?.server_id===team));
 		  //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
 		  alert('Team is successfully created!');
+		  window.location.reload()
 		})
+
+		.catch(err => {
+			alert('Team id already exists!');
+		})
+
+
 	}
 
   return (

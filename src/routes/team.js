@@ -6,16 +6,26 @@ class Team {
     console.log(req);
     const { serverId, serverName } = req.body;
     sql.query(
-      `INSERT INTO servers (server_id, server_name, owner_id) VALUES (${sql.escape(
-        serverId
-      )}, ${sql.escape(serverName)}, "teamowner")`
-    );
-
-    sql.query(
-      `INSERT INTO userservers (server_id, user_id) VALUES (${sql.escape(
-        serverId
-      )}, ${sql.escape(req.currentUser.id)})`
-    );
+      `SELECT * from servers WHERE server_id = ${sql.escape(serverId)}`, (err, response) => {
+        console.log(response)
+        if (response.length==0) {
+          sql.query(
+            `INSERT INTO servers (server_id, server_name, owner_id) VALUES (${sql.escape(
+              serverId
+            )}, ${sql.escape(serverName)}, "teamowner")`
+          );
+      
+          sql.query(
+            `INSERT INTO userservers (server_id, user_id) VALUES (${sql.escape(
+              serverId
+            )}, ${sql.escape(req.currentUser.id)})`
+          );
+          res.send()
+        }
+      else {res.status(400)}
+      }
+    )
+    
   };
 
   // deleteChannel = (req, res) => {
@@ -40,7 +50,6 @@ class Team {
     )}`;
     sql.query(sqlQuery, (err, response) => {
       console.log(response, err);
-
       res.send(response);
     });
   };

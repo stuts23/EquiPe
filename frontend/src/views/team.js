@@ -4,9 +4,8 @@ import { Row, Col } from "antd";
 import Channel2 from "../components/channel2";
 import Chat from "../components/chat";
 import "../styles/wrapper2.css";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
-import FormItem from "antd/lib/form/FormItem";
+import { Form, Input, Button} from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import jwt_decode from "jwt-decode";
 
 //import io from "socket.io-client";
@@ -19,16 +18,16 @@ const io = require("socket.io-client")("http://localhost:3000", {
 var baseUrl = "http://localhost:3000";
 let socket = io.connect(baseUrl, { transports: ["websocket", "polling"] });
 
-const Team = () => {
+const Team = (props) => {
   
 
   const [message, setMessage] = useState("");
   const [channel, setChannel] = useState("");
-  const [team, setTeam] = useState("");
+  const [team, setTeam] = useState(props.match.params.teamId);
   const [channels, setChannels] = useState([]);
   const [chats, setChats] = useState([]);
   const [newchannel, setNewchannel] = useState([]);
-
+  console.log(props)
   const handleMessage = (e) => {
     setMessage(e.target.value);
   };
@@ -39,7 +38,6 @@ const Team = () => {
       msg: message,
       user_name: jwt_decode(Cookies.get("token")).user_name,
     });
-    //setMessage("");
   };
 
   useEffect(() => {
@@ -59,9 +57,18 @@ const Team = () => {
     });
   }, []);
 
+  // var channelRandom = function (chid) {
+  //   // Math.random should be unique because of its seeding algorithm.
+  //   // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  //   // after the decimal.
+  //   return '_' + Math.random().toString(36).substr(2, 9) === chid;
+  // };
+
   const handleChannelCreate = () => {
+    var channelid = Math.random().toString(36).substr(2, 9);
+
     let data = JSON.stringify({
-      channelId: newchannel,
+      channelId: channelid,
       channelName: newchannel,
       serverId: team,
     });
@@ -103,7 +110,7 @@ const Team = () => {
   };
 
   const copy = async () => {
-    await navigator.clipboard.writeText("invite code");
+    await navigator.clipboard.writeText(team);
     alert('Invite Code copied');
   }
 

@@ -23,7 +23,7 @@ function App() {
       <Route path="/signup" render={() => isAuth?<Welcome/> : <SignUp/>} />
       <Route path="/call/:sessionId" render={(props) => isAuth?<VideoRoomComponent {...props}/> : <SignInSide/>} />
       <Route path="/welcome" render={() => isAuth?<Welcome/> : <SignInSide/>} />
-      <Route path="/team" render={() => isAuth?<Team/> : <SignInSide/>} />
+      <Route path="/team/:teamId" render={(props) => isAuth?<Team {...props}/> : <SignInSide/>} />
       <Route path="/jointeam" render={() => isAuth?<JoinTeam/> : <SignInSide/>} />
     </div>
   );
