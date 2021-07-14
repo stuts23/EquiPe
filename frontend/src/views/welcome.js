@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import welcome_image from "../assets/welcome_image.png";
 
+
 const { Title, Text } = Typography;
 
 function Welcome() {
@@ -35,7 +36,7 @@ function Welcome() {
     <Wrapper2>
       <Row>
         <Col span={14}>
-        <Row span={24} gutter={[0, 64]} style={{ marginTop: "4rem" }}>
+        <Row span={24} gutter={[0, 64]} >
           <Title>
             <span style={{ color: "#001529" }}>Welcome to équipe!</span>
           </Title>

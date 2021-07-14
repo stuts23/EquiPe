@@ -10,13 +10,18 @@ import {
 import "../styles/wrapper2.css";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
+
 
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
+
+
 class SiderDemo extends React.Component {
+
+
 
   constructor(props) {
     super(props);
@@ -24,7 +29,8 @@ class SiderDemo extends React.Component {
     this.state = {
       collapsed: false,
       team: [],
-
+      setTeam: () => {},
+      
     };
 	
   }
@@ -54,10 +60,10 @@ class SiderDemo extends React.Component {
    this.handleGetdata();
   };
 
-  handleClick = (e) => {
-    //this.props.setTeam(e)
+  handleClick = (e, teamId) => {
+    this.props.setTeam(teamId)
       
-    // console.log('clicked');
+    console.log('clicked');
   };
 
   handleLogout = () => {
@@ -81,26 +87,40 @@ class SiderDemo extends React.Component {
     window.open(`/call/${data}`, "_blank");
   };
   
+  // loadTeams = () => {
+  //   this.setState({redirect: true});
+  // }
+
+  nextPath(path) {
+    this.props.history.push(path);
+  }
 
   render() {
 
     const { collapsed } = this.state;
+
+    if (this.state.redirect) {
+      return <Redirect push to="/sample" />;
+    }
+  
     
     return (
+
+
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" >
+          <Menu theme="dark"  mode="inline" >
           
-            <Menu.Item key="1" icon={<HomeOutlined />}>
+            <Menu.Item key="1" icon={<HomeOutlined />} >
             <Link to="/welcome">
               Home
               </Link>
             </Menu.Item>
             
-            <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams">
+            <SubMenu key="sub1" icon={<TeamOutlined />} title="Teams" onTitleClick={() => this.nextPath('/team')}>
             {this.state.team?this.state.team.map (team => {
-               return <Menu.Item key={team.server_id} onClick={this.handleClick(team.server_id)}>{team.server_id}</Menu.Item>
+               return <Menu.Item id={team.server_id} onClick={(e) => {this.handleClick(e, team.server_id)}}>{team.server_id}</Menu.Item>
             }): null}
             </SubMenu>
             
@@ -136,4 +156,4 @@ class SiderDemo extends React.Component {
   }
 }
 
-export default SiderDemo;
+export default withRouter(SiderDemo);

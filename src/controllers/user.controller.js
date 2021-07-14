@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
 /******************************************************************************
  *                              User Controller
  ******************************************************************************/
@@ -64,7 +65,7 @@ class UserController {
       throw new HttpException(500, "Something went wrong");
     }
     const secretKey = "secret" || "";
-    const token = jwt.sign({ user_id: user.id.toString() }, secretKey, {
+    const token = jwt.sign({ user_id: user.id.toString(), user_name: user.username }, secretKey, {
       expiresIn: "8000h",
     });
 

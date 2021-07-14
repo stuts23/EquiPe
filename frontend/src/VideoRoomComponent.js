@@ -6,6 +6,7 @@ import StreamComponent from "./stream/StreamComponent";
 import DialogExtensionComponent from "./dialog-extension/DialogExtension";
 import ChatComponent from "./chat/ChatComponent";
 import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 import OpenViduLayout from "./layout/openvidu-layout";
 import UserModel from "./models/user-model";
@@ -28,9 +29,12 @@ class VideoRoomComponent extends Component {
     // let sessionName = this.props.sessionName
     //   ? this.props.sessionName
     //   : "SessionA";
+    // let userName = props.user
+    //   ? props.user
+    //   : "OpenVidu_User" + Math.floor(Math.random() * 100);
     let userName = props.user
       ? props.user
-      : "OpenVidu_User" + Math.floor(Math.random() * 100);
+      : jwt_decode(Cookies.get("token")).user_name;
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
@@ -243,7 +247,8 @@ class VideoRoomComponent extends Component {
       session: undefined,
       subscribers: [],
       mySessionId: "SessionA",
-      myUserName: "OpenVidu_User" + Math.floor(Math.random() * 100),
+     // myUserName: "OpenVidu_User" + Math.floor(Math.random() * 100),
+     myUserName: jwt_decode(Cookies.get("token")).user_name,
       localUser: undefined,
     });
     if (this.props.leaveSession) {

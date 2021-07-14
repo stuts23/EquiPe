@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import Wrapper2 from "../components/wrapper2";
 import { Row, Col } from "antd";
-import { Input, Button, Alert } from 'antd';
+import { Input, Button, Typography } from 'antd';
 import join_team from "../assets/join_team.png";
 import axios  from "axios";
 import Cookies from 'js-cookie';
 
+const { Title } = Typography;
 
 function JoinTeam() {
 	const [teamname, setTeamname] = useState('')
@@ -56,14 +57,18 @@ function JoinTeam() {
 
   return (
 	<Wrapper2>
-    <Row guuter={[64,0]}>
+    <Row guuter={[64, 0]}>
 			<Col span={12}> 
 			<Row>
+				<Title>Join Team</Title>
+			</Row>
+			<Row>
+			<span style={{ marginBottom: "2rem" }}>
 				<img alt={"join team"} src={join_team}>
 				</img>
+				</span>
 			</Row>
 			<Row gutter={[0, 16]}>
-				<Col span={4}></Col>
 				<Col span={16}>
 			<Input placeholder="Team Id" onChange={(e) => setTeamid(e.target.value)} value={teamid}/>
 			<Input placeholder="Team Name" onChange={(e) => setTeamname(e.target.value)} value={teamname}/>
@@ -71,23 +76,28 @@ function JoinTeam() {
           Create Team
         </Button>
 				</Col>
-				<Col span={4}></Col>
 			</Row>
+	
 			</Col>
 			<Col span={12}> 
 			<Row>
+				<Title>Create Team</Title>
+			</Row>
+			<Row>
+			<span style={{ marginBottom: "2rem" }}>
 				<img alt={"join team"} src={join_team}>
 				</img>
+				</span>
 			</Row>
 			<Row gutter={[0, 16]}>
-			<Col span={4}></Col>
+		
 			<Col span={16}>
 			<Input placeholder="Team Id" onChange={(e) => setNewteam(e.target.value)} value={newteam}/>
-			<Button type="primary" size="large" onClick={() => handleTeamJoin()}>
+			<Button type="primary" onClick={() => handleTeamJoin()}>
           Join Team
         </Button>
 		</Col>
-		<Col span={4}></Col>
+		
 			</Row>
 			</Col>
 

@@ -1,8 +1,6 @@
 import React from "react";
 import { List, message, Avatar, Spin } from "antd";
 import { Row, Col } from "antd";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 import reqwest from "reqwest";
 

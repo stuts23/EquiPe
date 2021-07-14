@@ -10,6 +10,12 @@ class Team {
         serverId
       )}, ${sql.escape(serverName)}, "teamowner")`
     );
+
+    sql.query(
+      `INSERT INTO userservers (server_id, user_id) VALUES (${sql.escape(
+        serverId
+      )}, ${sql.escape(req.currentUser.id)})`
+    );
   };
 
   // deleteChannel = (req, res) => {

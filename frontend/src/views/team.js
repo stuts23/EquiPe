@@ -7,6 +7,8 @@ import "../styles/wrapper2.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
+import jwt_decode from "jwt-decode";
+
 //import io from "socket.io-client";
 
 import axios from "axios";
@@ -35,7 +37,7 @@ const Team = () => {
     socket.emit("simple-chat-message", {
       channel_id: channel,
       msg: message,
-      user_name: "stuts",
+      user_name: jwt_decode(Cookies.get("token")).user_name,
     });
     //setMessage("");
   };
@@ -63,6 +65,7 @@ const Team = () => {
       channelName: newchannel,
       serverId: team,
     });
+    console.log(data);
     let config = {
       method: "post",
       url: "/api/v1/users/channel/create",
@@ -76,9 +79,11 @@ const Team = () => {
 
     axios(config).then((res) => {
       console.log(res);
+      
       //setChannels(res.data.filter(obj => obj?.server_id===team));
       //this.setState({altdata: res.data, data: res.data.filter(obj => obj?.server_id===this.props.team)})
     });
+
   };
 
   const handleSubmit = async () => {
