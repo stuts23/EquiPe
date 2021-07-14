@@ -8,6 +8,8 @@ Try yourself at: https://stutililani.me/welcome
 
 View video demo here: https://vimeo.com/574529246
 
+For more information: https://docs.google.com/presentation/d/1XWKAYU-wHWtMocX2LjT-1UndRrDRyjmVQJmHg3_2FpY/edit?usp=sharing
+
 # Key Features:
 1. Organised Collaboration Environment
 
