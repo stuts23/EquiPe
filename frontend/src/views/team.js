@@ -13,9 +13,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const io = require("socket.io-client")("http://localhost:3000", {
+const io = require("socket.io-client")("", {
 });
-var baseUrl = "http://localhost:3000";
+var baseUrl = "";
 let socket = io.connect(baseUrl, { transports: ["websocket", "polling"] });
 
 const Team = (props) => {

@@ -15,12 +15,12 @@ async function socketSetup(server) {
   console.log('socket setup called')
 
   io = socketIO(server, {
-    cors: {
-      origin: "http://localhost:3001",
-      methods: ["GET", "POST"],
-      transports: ['websocket', 'polling'],
-      credentials: true,
-    },
+    // cors: {
+    //   origin: "http://localhost:3001",
+    //   methods: ["GET", "POST"],
+    //   transports: ['websocket', 'polling'],
+    //   credentials: true,
+    // },
     allowEIO3: true
   });
   // Config for env variables
