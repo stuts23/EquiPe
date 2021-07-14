@@ -6,7 +6,7 @@ The target was to build a robust and User-friendly collaboration platform and ge
 
 Try yourself at: https://stutililani.me/welcome
 
-View video demo here: 
+View video demo here: https://vimeo.com/574529246
 
 # Key Features:
 1. Organised Collaboration Environment
